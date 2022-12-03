@@ -1,31 +1,27 @@
 package pet.project;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class SurvIVEit extends ApplicationAdapter {
+public class SurvIVEit extends Game {
+	public final int WORLD_WIDTH = 2000, WORLD_HEIGHT = 1000;
 	SpriteBatch batch;
-	Texture img;
-	
+	Viewport view;
+	OrthographicCamera camera;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
-
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		camera = new OrthographicCamera();
+		view = new FillViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+		camera.setToOrtho(false, 600,600);
+		setScreen(new MainScreen(this));
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }
