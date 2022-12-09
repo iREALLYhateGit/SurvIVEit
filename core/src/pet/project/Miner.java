@@ -24,7 +24,10 @@ public class Miner extends Actor {
     }
 
     public void act(float delta){
+
         spriteMiner.setBounds(getX(),getY(),getWidth(),getHeight());
+        miner.setX(miner.getX() + 100000);
+        System.out.println(miner.getX());
     }
     public void draw(Batch batch, float alpha){
         //super.draw(batch,alpha);

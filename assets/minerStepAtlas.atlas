@@ -1,0 +1,111 @@
+
+minerStepAtlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+miner1
+  rotate: false
+  xy: 1, 325
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner2
+  rotate: false
+  xy: 163, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner3
+  rotate: false
+  xy: 325, 325
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner4
+  rotate: false
+  xy: 163, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner5
+  rotate: false
+  xy: 325, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner6
+  rotate: false
+  xy: 1, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner7
+  rotate: false
+  xy: 487, 325
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner8
+  rotate: false
+  xy: 325, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner9
+  rotate: false
+  xy: 487, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner10
+  rotate: false
+  xy: 1, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner11
+  rotate: false
+  xy: 163, 325
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner12
+  rotate: false
+  xy: 1, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner13
+  rotate: false
+  xy: 163, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner14
+  rotate: false
+  xy: 325, 325
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+miner15
+  rotate: false
+  xy: 163, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+
