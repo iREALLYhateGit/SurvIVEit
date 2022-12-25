@@ -12,7 +12,7 @@ public class Miner extends Actor {
     SurvIVEit survIVEitObj;
     private Miner(SurvIVEit survIVEitObj){
         this.survIVEitObj = survIVEitObj;
-        setBounds(survIVEitObj.camera.position.x,survIVEitObj.camera.position.y,150,150);
+        setBounds(2000, 2000,160,160);
         imgMiner = new Texture("miner.png");
         spriteMiner = new Sprite(imgMiner);
     }
@@ -26,12 +26,14 @@ public class Miner extends Actor {
     public void act(float delta){
 
         spriteMiner.setBounds(getX(),getY(),getWidth(),getHeight());
-        miner.setX(miner.getX() + 100000);
-        System.out.println(miner.getX());
+        miner.setX(miner.getX() + 10);
+        System.out.println(miner.getX() + " " + miner.getY());
+
     }
     public void draw(Batch batch, float alpha){
+        batch.draw(survIVEitObj.minerStepAnim.getKeyFrame(GameScreen.time_animation,false), GameScreen.m,2000);
         //super.draw(batch,alpha);
-        spriteMiner.draw(batch);
+        //spriteMiner.draw(batch);
     }
 
 }
