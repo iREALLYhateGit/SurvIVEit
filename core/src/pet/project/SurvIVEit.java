@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class SurvIVEit extends Game {
@@ -12,13 +12,13 @@ public class SurvIVEit extends Game {
 	public final int WORLD_WIDTH = 1440 * 3, WORLD_HEIGHT = 3200 * 3;
 	SpriteBatch batch;
 	Viewport view;
-	OrthographicCamera camera;
+	public OrthographicCamera camera;
 
 	// launcher that indicates, if it is the first game start
 	FirstLaunchNotifier ff;
 
 	//real worls aspectRatio
-	float asp;
+	public float asp;
 
 
 	// method that starts the whole project
@@ -34,7 +34,7 @@ public class SurvIVEit extends Game {
 
 		//sets camera sizes depends on aspectRatio
 		camera.setToOrtho(false, WORLD_WIDTH / 3, (int) ((float) WORLD_WIDTH / 3 ) * asp);
-		view = new FillViewport(WORLD_WIDTH / 3, WORLD_HEIGHT/3, camera);
+		view = new StretchViewport(WORLD_WIDTH / 3, WORLD_HEIGHT/3, camera);
 
 		//initializing launcher
 		ff = FirstLaunchNotifier.getInstance();

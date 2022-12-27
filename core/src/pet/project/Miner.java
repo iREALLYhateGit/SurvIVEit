@@ -11,16 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Miner extends Actor {
     public static Miner miner;
-    Texture imgMiner;
     Sprite spriteMiner;
     SurvIVEit survIVEitObj;
     TextureAtlas minerStepAtlas;
     Animation <TextureRegion> minerStepAnim;
     private Miner(SurvIVEit survIVEitObj){
         this.survIVEitObj = survIVEitObj;
-        setBounds(2000, 2000,160,160);
-        imgMiner = new Texture("miner.png");
-        spriteMiner = new Sprite(imgMiner);
+        setBounds(survIVEitObj.camera.viewportWidth / 9 * 4, 0,160,160);
+        spriteMiner = new Sprite(new Texture("miner.png"));
         minerStepAtlas = new TextureAtlas(Gdx.files.internal("minerStepAtlas.atlas"));
 
         minerStepAnim = new Animation<TextureRegion>(1f/15f,minerStepAtlas.getRegions(), Animation.PlayMode.REVERSED);
@@ -34,16 +32,15 @@ public class Miner extends Actor {
     }
 
     public void act(float delta){
-
-        spriteMiner.setBounds(getX(),getY(),getWidth(),getHeight());
-        miner.setX(miner.getX() + 10);
+        spriteMiner.setBounds(getX(),getY() + 160,getWidth(),getHeight());
         System.out.println(miner.getX() + " " + miner.getY());
+        System.out.println(spriteMiner.getY());
 
     }
     public void draw(Batch batch, float alpha){
-        batch.draw(minerStepAnim.getKeyFrame(GameScreen.time_animation,false), GameScreen.m,2000);
-        //super.draw(batch,alpha);
-        //spriteMiner.draw(batch);
+        super.draw(batch,alpha);
+        batch.draw(minerStepAnim.getKeyFrame(GameScreen.time_animation,false),getX() ,getY());;
+        spriteMiner.draw(batch);
     }
 
 }

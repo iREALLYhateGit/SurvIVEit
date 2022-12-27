@@ -9,17 +9,29 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import pet.project.MenuScreenActors.Background;
+import pet.project.MenuScreenActors.Gear;
 
 public class MenuScreen implements Screen {
     //object of main class
-    SurvIVEit survObject;
+    static SurvIVEit survObject;
+
+    public final int START_BUTTON_WIDTH = 300;
+    public final int START_BUTTON_HEIGHT = 100;
+    public final int SETTINGS_BUTTON_SIZE = 150;
+
+    public static final float SCALE = 1.7f;
+
 
     //stage that represents the area where all the other objects move
-    Stage stage;
+    public Stage stage;
 
     //startButton
     Button startBut;
@@ -29,7 +41,7 @@ public class MenuScreen implements Screen {
     Skin settingsSkin;
 
     //actor for main menu background
-    Actor actor;
+    Actor background;
     //actor for setting's gears
     Actor gear;
 
@@ -42,57 +54,29 @@ public class MenuScreen implements Screen {
     public void show() {
         playSkin = new Skin(Gdx.files.internal("gop.json"));
         settingsSkin = new Skin(Gdx.files.internal("settingsButton.json"));
-        actor = new Actor(){
-            Sprite background = new Sprite(new Texture(Gdx.files.internal("menuBackground.jpg")));
 
-            @Override
-            public void act(float delta) {
-                super.act(delta);
-                background.setBounds(0,0,1440,3200);
-            }
-            @Override
-            public void draw(Batch batch, float parentAlpha) {
-                super.draw(batch, parentAlpha);
-                background.draw(batch);
-            }
-        };
-        gear = new Actor(){
-            public Sprite background = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
-            Sprite background2 = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
+        background = new Background(survObject);
+        gear = new Gear();
 
-            @Override
-            public void act(float delta) {
-                if(getRotation() == 0){
-                    background2.rotate(15);
-                }
-                super.act(delta);
-                setBounds(1100,150,88,88);
-                setScale(1.5f);
-                background.setScale(1.5f);
-                background2.setScale(1.5f);
-                background.setBounds(gear.getX(), gear.getY(),gear.getWidth(), gear.getHeight());
-                background2.setBounds(gear.getX() + (int) ( getWidth() * getScaleX() * Math.sqrt(1f/2f) - 2), gear.getY() + (int) ((float) (getHeight()) * getScaleY()* Math.sqrt(1f/2f)) - 2,gear.getWidth(), gear.getHeight());
-                setRotation(1);
-                background.rotate(getRotation());
-                background2.rotate(-getRotation());
-            }
-            @Override
-            public void draw(Batch batch, float parentAlpha) {
-                super.draw(batch, parentAlpha);
-                background.draw(batch);
-                background2.draw(batch);
-            }
-        };
         survObject.camera.position.set(survObject.camera.viewportWidth / 2, survObject.camera.viewportHeight / 2, 0);
+
         stage = new Stage(survObject.view, survObject.batch);
+
         startBut = new ImageButton(playSkin);
         settingsBut = new Button(settingsSkin);
+
         startBut.setTransform(true);
         settingsBut.setTransform(true);
-        startBut.scaleBy(1.2f);
-        settingsBut.scaleBy(1f);
-        settingsBut.setBounds(1035,90,150,150);
-        startBut.setBounds(survObject.camera.viewportWidth / 2 - 300,survObject.camera.viewportHeight / 2 - 100/2,300,100);
+
+        startBut.scaleBy(SCALE * 0.8f);
+        settingsBut.scaleBy(SCALE * 0.7f);
+
+        startBut.setOrigin(Align.center);
+        settingsBut.setOrigin(Align.center);
+        settingsBut.setBounds(Gear.X + 10 +  (int) ((float) Gear.ORIGIN_WIDTH * SCALE * Math.sqrt(1f/2f) / 2),
+                Gear.Y + 10 + (int) ((float) Gear.ORIGIN_WIDTH * SCALE * Math.sqrt(1f/2f)/2),SETTINGS_BUTTON_SIZE,SETTINGS_BUTTON_SIZE);
+        startBut.setBounds((float) survObject.camera.viewportWidth / 2,survObject.camera.viewportHeight / 3,
+                START_BUTTON_WIDTH,START_BUTTON_HEIGHT);
 
         startBut.addListener(new InputListener(){
 
@@ -106,23 +90,22 @@ public class MenuScreen implements Screen {
                 survObject.setScreen(new GameScreen(survObject));
             }
         });
-        stage.addActor(actor);
+        stage.addActor(background);
         stage.addActor(startBut);
         stage.addActor(settingsBut);
         stage.addActor(gear);
+        stage.addActor(new Snake(survObject));
+        gear.setTouchable(Touchable.disabled);
         Gdx.input.setInputProcessor(stage);
+        stage.getBatch().setProjectionMatrix(stage.getCamera().combined);
     }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
+        stage.getBatch().setProjectionMatrix(stage.getCamera().combined);
         stage.act(delta);
         stage.draw();
-        if(startBut.isTouchable()){
-            System.out.println("click");
-        }
-        System.out.println(survObject.camera.position.x + "  " +  survObject.camera.position.y);
-        System.out.println(startBut.getRotation());
     }
 
     @Override
@@ -135,10 +118,14 @@ public class MenuScreen implements Screen {
     public void resume() {}
 
     @Override
-    public void hide() {}
+    public void hide() {
+        playSkin.dispose();
+        settingsSkin.dispose();
+    }
 
     @Override
     public void dispose() {
-        survObject.dispose();
+        playSkin.dispose();
+        settingsSkin.dispose();
     }
 }

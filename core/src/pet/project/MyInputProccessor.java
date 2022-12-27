@@ -32,6 +32,9 @@ public class MyInputProccessor implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if(screenX > 0){
+            return true;
+        }
         return false;
     }
 
