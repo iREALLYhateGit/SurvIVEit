@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Ground extends Actor {
-    Sprite groundSkin = new Sprite(new Texture(Gdx.files.internal("ground1.png")));
+    private final Sprite groundSkin = new Sprite(new Texture(Gdx.files.internal("ground1.png")));
 
     public Ground() {
         setSize(160,160);

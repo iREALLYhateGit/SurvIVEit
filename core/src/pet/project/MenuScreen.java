@@ -2,9 +2,6 @@ package pet.project;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -20,47 +17,40 @@ import pet.project.MenuScreenActors.Background;
 import pet.project.MenuScreenActors.Gear;
 
 public class MenuScreen implements Screen {
-    //object of main class
-    static SurvIVEit survObject;
 
-    public final int START_BUTTON_WIDTH = 300;
-    public final int START_BUTTON_HEIGHT = 100;
-    public final int SETTINGS_BUTTON_SIZE = 150;
+    //buttons "play" and "settings" size parameters
+    private final int START_BUTTON_WIDTH = 300;
+    private final int START_BUTTON_HEIGHT = 100;
+    private final int SETTINGS_BUTTON_SIZE = 150;
 
+    //scaling parameter *Button * scale = real button in world*
     public static final float SCALE = 1.7f;
 
 
     //stage that represents the area where all the other objects move
-    public Stage stage;
+    private final Stage stage = new Stage(Interlayer.survObj.view, Interlayer.survObj.batch);
 
     //startButton
-    Button startBut;
-    Button settingsBut;
+    private Button startBut;
+    private Button settingsBut;
     //skin for startButton
-    Skin playSkin;
-    Skin settingsSkin;
+    private Skin playSkin;
+    private Skin settingsSkin;
 
     //actor for main menu background
-    Actor background;
+    private Actor background;
     //actor for setting's gears
-    Actor gear;
-
-
-    public MenuScreen(SurvIVEit survObject){
-        this.survObject = survObject;
-    }
+    private Actor gear;
 
     @Override
     public void show() {
         playSkin = new Skin(Gdx.files.internal("gop.json"));
         settingsSkin = new Skin(Gdx.files.internal("settingsButton.json"));
 
-        background = new Background(survObject);
+        background = new Background();
         gear = new Gear();
 
-        survObject.camera.position.set(survObject.camera.viewportWidth / 2, survObject.camera.viewportHeight / 2, 0);
-
-        stage = new Stage(survObject.view, survObject.batch);
+        Interlayer.survObj.camera.position.set(Interlayer.survObj.camera.viewportWidth / 2, Interlayer.survObj.camera.viewportHeight / 2, 0);
 
         startBut = new ImageButton(playSkin);
         settingsBut = new Button(settingsSkin);
@@ -75,7 +65,7 @@ public class MenuScreen implements Screen {
         settingsBut.setOrigin(Align.center);
         settingsBut.setBounds(Gear.X + 10 +  (int) ((float) Gear.ORIGIN_WIDTH * SCALE * Math.sqrt(1f/2f) / 2),
                 Gear.Y + 10 + (int) ((float) Gear.ORIGIN_WIDTH * SCALE * Math.sqrt(1f/2f)/2),SETTINGS_BUTTON_SIZE,SETTINGS_BUTTON_SIZE);
-        startBut.setBounds((float) survObject.camera.viewportWidth / 2,survObject.camera.viewportHeight / 3,
+        startBut.setBounds((float) Interlayer.survObj.camera.viewportWidth / 2, Interlayer.survObj.camera.viewportHeight / 3,
                 START_BUTTON_WIDTH,START_BUTTON_HEIGHT);
 
         startBut.addListener(new InputListener(){
@@ -87,15 +77,15 @@ public class MenuScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                survObject.setScreen(new GameScreen(survObject));
+                Interlayer.survObj.setScreen(Interlayer.interlayer.gameScreen);
             }
         });
         stage.addActor(background);
         stage.addActor(startBut);
         stage.addActor(settingsBut);
         stage.addActor(gear);
-        stage.addActor(new Snake(survObject));
         gear.setTouchable(Touchable.disabled);
+        // sets input events handler
         Gdx.input.setInputProcessor(stage);
         stage.getBatch().setProjectionMatrix(stage.getCamera().combined);
     }
@@ -125,6 +115,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         playSkin.dispose();
         settingsSkin.dispose();
     }

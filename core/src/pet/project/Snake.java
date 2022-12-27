@@ -10,19 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Snake extends Actor {
 
-    Sprite snakeSkin = new Sprite(new Texture(Gdx.files.internal("monster.png")));
-    Sound snakeDeath = Gdx.audio.newSound(Gdx.files.internal("zmey.mp3"));
-    int vy;
-    boolean isAlive;
-    int width, height;
+    private final Sprite snakeSkin = new Sprite(new Texture(Gdx.files.internal("monster.png")));
+    private final Sound snakeDeath = Gdx.audio.newSound(Gdx.files.internal("zmey.mp3"));
+    private boolean isAlive;
     Snake(SurvIVEit surveObject) {
         //Так как змеи должны рисоваться в рандомном месте, но внутри(вместо) блока земли, то координаты x и y выставляем рандомно
         setSize(160,160);
         snakeSkin.rotate(-90);
         isAlive = true;
-        width = 120;
-        height = 120;
-        vy=15;
     }
 
     @Override

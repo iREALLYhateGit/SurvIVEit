@@ -10,11 +10,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Miner extends Actor {
-    public static Miner miner;
-    Sprite spriteMiner;
-    SurvIVEit survIVEitObj;
-    TextureAtlas minerStepAtlas;
-    Animation <TextureRegion> minerStepAnim;
+    private static Miner miner;
+    private final Sprite spriteMiner;
+    private SurvIVEit survIVEitObj;
+    private final TextureAtlas minerStepAtlas;
+    public Animation <TextureRegion> minerStepAnim;
     private Miner(SurvIVEit survIVEitObj){
         this.survIVEitObj = survIVEitObj;
         setBounds(survIVEitObj.camera.viewportWidth / 9 * 4, 0,160,160);
@@ -33,8 +33,8 @@ public class Miner extends Actor {
 
     public void act(float delta){
         spriteMiner.setBounds(getX(),getY() + 160,getWidth(),getHeight());
-        System.out.println(miner.getX() + " " + miner.getY());
-        System.out.println(spriteMiner.getY());
+        /*System.out.println(miner.getX() + " " + miner.getY());
+        System.out.println(spriteMiner.getY());*/
 
     }
     public void draw(Batch batch, float alpha){

@@ -7,15 +7,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class SnakeShhhoot extends Actor {
-    Sprite shootImg = new Sprite(new Texture(Gdx.files.internal("shoot.png")));
+    Sprite shootImg;
     Snake snake;
 
     //public boolean isAlive = true;
     public SnakeShhhoot(Snake snake) {
+        shootImg = new Sprite(new Texture(Gdx.files.internal("shoot.png")));
+        this.snake = snake;
         setBounds(snake.getX() + 160, snake.getY(), 80,80);
         rotateBy(90);
         shootImg.rotate(90);
-        this.snake = snake;
     }
 
     @Override

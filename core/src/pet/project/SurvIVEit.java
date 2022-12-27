@@ -8,26 +8,26 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class SurvIVEit extends Game {
+
 	// setting world's sizes.
-	public final int WORLD_WIDTH = 1440 * 3, WORLD_HEIGHT = 3200 * 3;
+	public static final int WORLD_WIDTH = 1440 * 3, WORLD_HEIGHT = 3200 * 3;
+
 	SpriteBatch batch;
+	public final OrthographicCamera camera = new OrthographicCamera();
 	Viewport view;
-	public OrthographicCamera camera;
 
 	// launcher that indicates, if it is the first game start
-	FirstLaunchNotifier ff;
+	private FirstLaunchNotifier ff;
 
-	//real worls aspectRatio
+	//real world's aspectRatio
 	public float asp;
 
 
 	// method that starts the whole project
 	@Override
 	public void create () {
-		// sets input events handler
-		Gdx.input.setInputProcessor(new MyInputProccessor());
 		batch = new SpriteBatch();
-		camera = new OrthographicCamera();
+		//camera = new OrthographicCamera();
 
 		//sets real aspectRatio
 		asp = ((float) Gdx.graphics.getHeight())/ ((float) Gdx.graphics.getWidth());
@@ -40,9 +40,9 @@ public class SurvIVEit extends Game {
 		ff = FirstLaunchNotifier.getInstance();
 
 		//starting screens
-		setScreen(new MenuScreen(this));
+		setScreen(Interlayer.getInterlayer(this).menuScreen);
+
 		if(ff.getLaunchBoolean()){
-			setScreen(new MenuScreen(this));
 			ff.saveLaunchState(false);
 		}
 		else{

@@ -10,8 +10,8 @@ import com.badlogic.gdx.utils.Align;
 import pet.project.MenuScreen;
 
 public class Gear extends Actor {
-    public Sprite gear1 = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
-    Sprite gear2 = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
+    private final Sprite gear1 = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
+    private final Sprite gear2 = new Sprite(new Texture(Gdx.files.internal("settingsGear.png")));
     public static final int X = 1100;
     public static final int Y = 200;
     public static final float ORIGIN_WIDTH = 88;

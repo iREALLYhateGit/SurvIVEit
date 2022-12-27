@@ -6,16 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import pet.project.MenuScreen;
-import pet.project.SurvIVEit;
+import pet.project.Interlayer;
 
 public class Background extends Actor {
-    Sprite background = new Sprite(new Texture(Gdx.files.internal("menuBackground.jpg")));
-    float aspectRatio;
+    private final Sprite background = new Sprite(new Texture(Gdx.files.internal("menuBackground.jpg")));
+    private float aspectRatio;
 
-    public Background(SurvIVEit survObject) {
+    public Background() {
         setBounds(0,0,1440,3320);
-        aspectRatio = (float) survObject.camera.viewportHeight / (float) getHeight();
+        aspectRatio = Interlayer.survObj.camera.viewportHeight / getHeight();
         if(aspectRatio > 1f){
             setScale(aspectRatio);
         }
