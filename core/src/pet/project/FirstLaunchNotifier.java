@@ -8,8 +8,8 @@ public class FirstLaunchNotifier {
     private Preferences prefs;
     private boolean launchBoolean;
 
+    private static final String PREF_NAME = "Prefs";
     private static final String LAUNCH_KEY = "launch";
-    private static final String PREF_NAME = "TMS";
 
     private FirstLaunchNotifier(){
         prefs= Gdx.app.getPreferences(PREF_NAME);

@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setWindowedMode(1200,1000);
+		config.setWindowedMode(1080,1920);
 		config.setTitle("SurvIVEit");
 		new Lwjgl3Application(new SurvIVEit(), config);
 	}

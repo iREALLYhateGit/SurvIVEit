@@ -1,0 +1,9 @@
+{
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: {
+		imageUp: playBut1
+		imageDown: playBut2
+		imageOver: playBut2
+	}
+}
+}

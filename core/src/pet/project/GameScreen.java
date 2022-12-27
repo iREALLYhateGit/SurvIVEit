@@ -5,13 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
     SurvIVEit survObject;
-    MainScreen mainscreen;
     Stage stage;
     Miner miner;
     protected static float m = 1600;
@@ -19,9 +19,8 @@ public class GameScreen implements Screen {
     boolean goo = false;
     protected static float time_animation = 0f;
 
-    public GameScreen(MainScreen mainscreen){
-        this.mainscreen = mainscreen;
-        this.survObject = mainscreen.survObject;
+    public GameScreen(SurvIVEit survObject){
+        this.survObject = survObject;
         miner = Miner.getminer(survObject);
     }
 
@@ -37,7 +36,6 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.isTouched()){
-            survObject.ff.saveLaunchState(true);
             goo = true;
             lastTime = TimeUtils.millis();
         }

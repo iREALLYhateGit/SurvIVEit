@@ -1,0 +1,20 @@
+
+settingsButton.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+realSettingsButton
+  rotate: false
+  xy: 1, 179
+  size: 176, 176
+  orig: 176, 176
+  offset: 0, 0
+  index: -1
+realSettingsButtonPressed
+  rotate: false
+  xy: 1, 1
+  size: 176, 176
+  orig: 176, 176
+  offset: 0, 0
+  index: -1
