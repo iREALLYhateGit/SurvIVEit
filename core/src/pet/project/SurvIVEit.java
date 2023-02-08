@@ -2,6 +2,7 @@ package pet.project;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -22,12 +23,15 @@ public class SurvIVEit extends Game {
 	//real world's aspectRatio
 	public float asp;
 
+	InputMultiplexer inputMultiplexer;
+
 
 	// method that starts the whole project
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		//camera = new OrthographicCamera();
+		inputMultiplexer = new InputMultiplexer(new MyInputProccessor());
 
 		//sets real aspectRatio
 		asp = ((float) Gdx.graphics.getHeight())/ ((float) Gdx.graphics.getWidth());

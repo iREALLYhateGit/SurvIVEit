@@ -15,8 +15,13 @@ public class Snake extends Actor {
     private boolean isAlive;
     Snake() {
         //Так как змеи должны рисоваться в рандомном месте, но внутри(вместо) блока земли, то координаты x и y выставляем рандомно
+        snakeSkin.setOrigin(80,80);
         setSize(160,160);
+        //snakeSkin.setOrigin(0,0);
         snakeSkin.rotate(-90);
+        System.out.println(snakeSkin.getHeight());
+        System.out.println("get Y " + snakeSkin.getOriginX());
+        //snakeSkin.get
         isAlive = true;
     }
 
@@ -24,6 +29,8 @@ public class Snake extends Actor {
     public void act(float delta) {
         super.act(delta);
         snakeSkin.setBounds(getX(),getY(),getWidth(),getHeight());
+        System.out.println(snakeSkin.getHeight());
+        System.out.println("get Y " + snakeSkin.getOriginY());
         if(!isAlive){
             snakeDeath.play();
         }
